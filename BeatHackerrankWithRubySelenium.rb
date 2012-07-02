@@ -2,7 +2,7 @@
   Title: BeatHackerrankWithRubySelenium.rb
   Author: Dave Guarino (daguar on github; daguar@gmail.com)
   Date: July 7, 2012
-  Version: 0.1 (alpha)
+  Version: 0.11 (alpha)
   Description: Simple script that uses Selenium (Ruby webdriver) to beat the first HackerRank challenge
   Notes: You need to add your login and password below before running. Make sure you've got Firefox, and you've gem-installed selenium-webdriver, then just run it with "ruby BeatHackerrankWithRubySelenium.rb'!
   Caveat: This was really a toy exercise to learn Selenium, so it's ugly as hell and won't compete with other approaches. But I had a ton of fun!
@@ -34,12 +34,10 @@ max = 2560
 
 # Log in
 element = driver.find_element :id => "prompt-input"
-element.send_keys "login #{login}"
-element.send_keys :return
+element.send_keys "login #{login}", :return
 sleep 0.5
 element = driver.find_element :id => "session-password"
-element.send_keys password
-element.send_keys :return
+element.send_keys password, :return
 sleep 1
 
 # Start beating it!
@@ -55,8 +53,7 @@ while startnumber < max do
   sleep 1
   element = driver.find_element :id => "game-input"
   step = startnumber % 6
-  element.send_keys step.to_s
-  element.send_keys :return
+  element.send_keys step.to_s, :return
   sleep 1
   elements = driver.find_elements(:xpath, '//*[@id="game-output"]')
   remaining = /Remaining candies: '(.+)'/.match(elements[0].text)[1]
@@ -72,8 +69,7 @@ while startnumber < max do
     step = remaining % 6
     puts "step #{step}"
     element = driver.find_element :id => "game-input"
-    element.send_keys step.to_s
-    element.send_keys :return
+    element.send_keys step.to_s, :return
     sleep 1.2
   end
   startnumber = startnumber + 1
