@@ -48,8 +48,7 @@ while startnumber < max do
   sleep 1
   puts "Starting Number: #{startnumber}"
   element = driver.find_element :id => "prompt-input"
-  element.send_keys "challenge #{startnumber}"
-  element.send_keys :return
+  element.send_keys "challenge #{startnumber}", :return
   sleep 1
   element = driver.find_element :id => "game-input"
   step = startnumber % 6
